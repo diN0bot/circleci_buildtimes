@@ -4,7 +4,7 @@ Script to plot CircleCI build times
 
 ## Depends on a patch to the python circleci tool:
 
-    https://github.com/qba73/circleclient/pull/4
+https://github.com/qba73/circleclient/pull/4
 
 ## Run on command line like so:
 
