@@ -20,25 +20,17 @@ def get_builds():
     BRANCH = os.environ['CIRCLECI_BRANCH']
 
     client = circleclient.CircleClient(TOKEN)
-    builds = client.build.recent(REPO_ORG, REPO_NAME,
-                                 branch=BRANCH,
+    builds = []
+    for x in range(0, 40):
+        builds.extend(get_builds_(client, REPO_ORG, REPO_NAME, BRANCH, x*100))
+    return builds
+
+def get_builds_(client, repo_org, repo_name, branch_name, offset):
+    builds = client.build.recent(repo_org, repo_name,
+                                 branch=branch_name,
                                  limit=100,
-                                 filter="successful")
-    builds.extend(client.build.recent(REPO_ORG, REPO_NAME,
-                                      branch=BRANCH,
-                                      limit=100,
-                                      filter="successful",
-                                      offset=100))
-    builds.extend(client.build.recent(REPO_ORG, REPO_NAME,
-                                      branch=BRANCH,
-                                      limit=100,
-                                      filter="successful",
-                                      offset=200))
-    builds.extend(client.build.recent(REPO_ORG, REPO_NAME,
-                                      branch=BRANCH,
-                                      limit=100,
-                                      filter="successful",
-                                      offset=300))
+                                 filter="successful",
+                                 offset=offset)
     return builds
 
 def create_dataset(builds):
