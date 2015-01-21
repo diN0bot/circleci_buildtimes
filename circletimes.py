@@ -22,7 +22,10 @@ def get_builds():
     client = circleclient.CircleClient(TOKEN)
     builds = []
     for x in range(0, 40):
-        builds.extend(get_builds_(client, REPO_ORG, REPO_NAME, BRANCH, x*100))
+        b = get_builds_(client, REPO_ORG, REPO_NAME, BRANCH, x*100)
+        if not b:
+            break
+        builds.extend(b)
     return builds
 
 def get_builds_(client, repo_org, repo_name, branch_name, offset):
