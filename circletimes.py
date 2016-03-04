@@ -56,7 +56,7 @@ def plot(buildtimes, xseries, moving_avg):
     pyplot.plot(xseries, buildtimes, 'k.')
     pyplot.plot(xseries[:len(moving_avg)], moving_avg, 'r')
     pyplot.xlim(min(xseries), max(xseries))
-    pyplot.ylim(min(buildtimes)-1, max(buildtimes)+1)
+    pyplot.ylim(0, max(buildtimes)+1)
     pyplot.ylabel("Build time in minutes")
     pyplot.grid(True)
 
